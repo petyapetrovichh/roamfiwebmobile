@@ -61,7 +61,7 @@
   @media (min-width: 768px) {
     .ph-row { gap:12px; grid-template-columns:100px 1fr 150px 70px; padding:16px 24px; }
   }
-  .stat-card { background:#F4F5F6; border-radius:16px; padding:24px; text-align:center; }
+  .stat-card { background:#F4F5F6; border-radius:16px; padding:24px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; }
   .bar-track { flex:1; height:10px; border-radius:9999px; background:#F4F5F6; overflow:hidden; }
   .bar-fill { height:100%; border-radius:9999px; background:#05E3F7; }
 
@@ -262,6 +262,17 @@
         <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'日本語')"><span class="fi fi-jp rounded-[3px]" style="font-size:20px"></span><span>日本語</span></button>
         <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'한국어')"><span class="fi fi-kr rounded-[3px]" style="font-size:20px"></span><span>한국어</span></button>
       </div>
+
+      <div class="flex flex-row items-stretch gap-x-3 mt-4 mb-2">
+        <button class="btn btn-white flex-1 h-[56px] gap-x-2 rounded-[10px] flex-center px-2">
+          <svg class="size-[26px] shrink-0"><use href="#common-apple"></use></svg>
+          <div class="flex flex-col items-start text-[12px] leading-tight"><span>Download on</span><span class="font-medium">Apple Store</span></div>
+        </button>
+        <button class="btn btn-white flex-1 h-[56px] gap-x-2 rounded-[10px] flex-center px-2">
+          <svg class="size-[26px] shrink-0" viewBox="0 0 32 32"><use href="#google-play-badge"></use></svg>
+          <div class="flex flex-col items-start text-[12px] leading-tight"><span>Download on</span><span class="font-medium">Google Play</span></div>
+        </button>
+      </div>
     </nav>
   </div>
 
@@ -390,7 +401,7 @@
       <div class="pt-8 pb-12 md:pt-[110px] md:pb-0 h-auto md:h-full text-white flex flex-col relative">
         <img alt="bg" class="w-[290px] h-[290px] object-contain mx-auto -mb-16 md:mb-0 md:w-[610px] md:h-[610px] md:object-fill md:absolute md:right-0 md:bottom-0" src="https://bres.talex.world/static/25d29ab1-7c02-47ac-beaf-bfdb82f50d29.png">
         <div>
-          <div class="font-medium text-[40px] leading-[46px] md:text-[60px] md:leading-none">eSIM<br>that pays you back</div>
+          <div class="font-medium text-[36px] leading-[42px] md:text-[60px] md:leading-none">eSIM<br>that pays you back</div>
           <div class="text-[18px] leading-[30px] md:text-[20px] md:leading-[30px] mt-3 md:mt-0">Stay connected in <span class="font-bold text-brand">200+</span> destinations with pay-as-you-go or destination plans.</div>
           <div class="text-[18px] leading-[30px] md:text-[20px] md:leading-[30px]">Earn <span class="font-bold text-brand">USD</span> back from every eSIM purchase made by others worldwide.</div>
         </div>
@@ -837,24 +848,24 @@
         <span class="font-bold text-[22px]">Current revenue sharing pool</span>
         <div class="diagram-card flex flex-col gap-y-5 !px-4 !py-5 md:!px-10 md:!py-9">
           <div class="flex items-center gap-x-2 md:gap-x-4">
-            <span class="font-bold text-[12px] md:text-[14px] w-[72px] md:w-[110px] shrink-0">Pool A (40%)</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[62px] md:w-[110px] shrink-0">Pool A (40%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:6%"></div></div>
-            <span class="font-bold text-[12px] md:text-[14px] w-[42px] md:w-[60px] shrink-0 text-right">$18</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[38px] md:w-[60px] shrink-0 text-right">$18</span>
           </div>
           <div class="flex items-center gap-x-2 md:gap-x-4">
-            <span class="font-bold text-[12px] md:text-[14px] w-[72px] md:w-[110px] shrink-0">Pool B (30%)</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[62px] md:w-[110px] shrink-0">Pool B (30%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:14%"></div></div>
-            <span class="font-bold text-[12px] md:text-[14px] w-[42px] md:w-[60px] shrink-0 text-right">$210</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[38px] md:w-[60px] shrink-0 text-right">$210</span>
           </div>
           <div class="flex items-center gap-x-2 md:gap-x-4">
-            <span class="font-bold text-[12px] md:text-[14px] w-[72px] md:w-[110px] shrink-0">Pool C (20%)</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[62px] md:w-[110px] shrink-0">Pool C (20%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:48%"></div></div>
-            <span class="font-bold text-[12px] md:text-[14px] w-[42px] md:w-[60px] shrink-0 text-right">$1.4K</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[38px] md:w-[60px] shrink-0 text-right">$1.4K</span>
           </div>
           <div class="flex items-center gap-x-2 md:gap-x-4">
-            <span class="font-bold text-[12px] md:text-[14px] w-[72px] md:w-[110px] shrink-0">Pool D (10%)</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[62px] md:w-[110px] shrink-0">Pool D (10%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
-            <span class="font-bold text-[12px] md:text-[14px] w-[42px] md:w-[60px] shrink-0 text-right">$6.8K</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[38px] md:w-[60px] shrink-0 text-right">$6.8K</span>
           </div>
         </div>
       </div>
@@ -934,7 +945,7 @@
               <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">ML</div>
               <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">1</span>
             </div>
-            <div class="flex-1"><div class="font-bold text-[14px]">Marcus L.</div><div class="caption" style="text-align:left">445 eligible eSIM purchases · 6.07% current weight</div></div>
+            <div class="flex-1"><div class="font-bold text-[14px]">Marcus L.</div><div class="caption" style="text-align:left;display:flex;flex-direction:column">445 eligible eSIM purchases<span>6.07% current weight</span></div></div>
             <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$1,950</span>
           </div>
           <div class="flex items-center gap-x-3 md:gap-x-4">
@@ -942,7 +953,7 @@
               <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">JP</div>
               <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">2</span>
             </div>
-            <div class="flex-1"><div class="font-bold text-[14px]">Jay Patel</div><div class="caption" style="text-align:left">856 eligible eSIM purchases · 1.18% current weight</div></div>
+            <div class="flex-1"><div class="font-bold text-[14px]">Jay Patel</div><div class="caption" style="text-align:left;display:flex;flex-direction:column">856 eligible eSIM purchases<span>1.18% current weight</span></div></div>
             <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$960</span>
           </div>
           <div class="flex items-center gap-x-3 md:gap-x-4">
@@ -950,7 +961,7 @@
               <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">SM</div>
               <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">3</span>
             </div>
-            <div class="flex-1"><div class="font-bold text-[14px]">Sasha M.</div><div class="caption" style="text-align:left">213 eligible eSIM purchases · 3.75% current weight</div></div>
+            <div class="flex-1"><div class="font-bold text-[14px]">Sasha M.</div><div class="caption" style="text-align:left;display:flex;flex-direction:column">213 eligible eSIM purchases<span>3.75% current weight</span></div></div>
             <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$687</span>
           </div>
           <div class="flex items-center gap-x-3 md:gap-x-4">
@@ -958,7 +969,7 @@
               <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">AK</div>
               <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">4</span>
             </div>
-            <div class="flex-1"><div class="font-bold text-[14px]">Aria Khan</div><div class="caption" style="text-align:left">260 eligible eSIM purchases · 5.22% current weight</div></div>
+            <div class="flex-1"><div class="font-bold text-[14px]">Aria Khan</div><div class="caption" style="text-align:left;display:flex;flex-direction:column">260 eligible eSIM purchases<span>5.22% current weight</span></div></div>
             <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$400</span>
           </div>
           <div class="flex items-center gap-x-3 md:gap-x-4">
@@ -966,7 +977,7 @@
               <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">KN</div>
               <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">5</span>
             </div>
-            <div class="flex-1"><div class="font-bold text-[14px]">Kai N.</div><div class="caption" style="text-align:left">178 eligible eSIM purchases · 2.43% current weight</div></div>
+            <div class="flex-1"><div class="font-bold text-[14px]">Kai N.</div><div class="caption" style="text-align:left;display:flex;flex-direction:column">178 eligible eSIM purchases<span>2.43% current weight</span></div></div>
             <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$120</span>
           </div>
         </div>
@@ -1057,7 +1068,7 @@
             <div class="flex items-center justify-between gap-x-2">
               <div class="flex items-center gap-x-2 min-w-0">
                 <svg class="size-5 shrink-0"><use href="#coin-dollar"></use></svg>
-                <span class="text-[13px] md:text-[15px] truncate"><span class="font-bold">X USD</span> (Balance) from revenue sharing</span>
+                <span class="text-[13px] md:text-[15px] leading-[18px] md:leading-[20px]"><span class="font-bold">X USD</span> (Balance)<br class="md:hidden"> from revenue sharing</span>
               </div>
               <button onclick="showPage('revenue-sharing')" class="btn shrink-0 text-[13px] md:text-[14px] text-font-tertiary flex items-center gap-x-1">Rule<svg class="size-3"><use href="#icon-chevron-r"></use></svg></button>
             </div>
