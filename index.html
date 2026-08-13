@@ -215,60 +215,60 @@
 
   <!-- ============ HEADER (mobile) ============ -->
   <header id="mobile-header" class="flex md:hidden flex-row items-center bg-primary safe-top safe-l safe-r" style="height:var(--mh)">
-    <div class="w-full flex flex-row items-center justify-between px-4">
+    <div class="w-full flex flex-row items-center justify-between px-4 relative">
       <svg class="shrink-0 w-[104px] h-[22px] text-white cursor-pointer" onclick="showPage('home')"><use href="#navi-logo"></use></svg>
       <div class="flex items-center gap-x-3">
         <button id="m-login-btn" class="btn text-white bg-white/10 rounded-full px-5 h-9 font-bold text-[14px]" onclick="completeLogin()">Login</button>
         <div id="m-user-menu-wrap" class="relative" style="display:none">
           <button id="m-user-avatar-btn" onclick="toggleUserMenu('mobile')" class="btn size-9 rounded-full flex-center shrink-0" style="background:conic-gradient(#F64658 0deg 90deg,#FAC775 90deg 180deg,#639922 180deg 270deg,#378ADD 270deg 360deg)"></button>
-          <div id="m-user-menu-panel" class="absolute right-0 top-11 flex flex-col bg-white w-[220px] rounded-[18px] shadow-lg text-font-primary p-2" style="display:none;z-index:45">
-            <div class="flex items-center justify-between px-2.5 py-2.5">
-              <div class="flex items-center gap-x-2">
-                <svg class="size-5"><use href="#coin-dollar"></use></svg>
-                <span class="font-bold text-[13px]">Balance</span>
-              </div>
-              <span class="font-bold text-[13px]">$68.75</span>
-            </div>
-            <div class="flex items-center justify-between px-2.5 py-2.5 gap-x-1">
-              <div class="flex items-center gap-x-2 min-w-0">
-                <svg class="size-5 shrink-0"><use href="#coin-rf"></use></svg>
-                <span class="font-bold text-[13px] shrink-0">Bonus</span>
-                <div class="relative shrink-0" id="m-rf-info-wrap">
-                  <button onclick="toggleRfInfo(event,'m-rf-info-tooltip')" class="tap44 btn"><svg class="size-3.5"><use href="#icon-info"></use></svg></button>
-                  <div id="m-rf-info-tooltip" class="absolute left-0 top-6 bg-white rounded-[14px] shadow-lg p-3" style="display:none;width:200px;max-width:65vw;z-index:46;border:1px solid #4F596429">
-                    <span class="text-[12px] text-font-secondary leading-[18px]">RF is a bonus token which is provided separately from USD by revenue sharing program. More details about RF <a href="https://www.roamfi.net/reward/rule" target="_blank" class="font-bold" style="color:#0C1214;text-decoration:underline">here</a>.</span>
-                  </div>
-                </div>
-              </div>
-              <span class="font-bold text-[13px] shrink-0">7437.71 RF</span>
-            </div>
-            <div class="w-full h-[1px]" style="background:#4F596414"></div>
-            <button class="flex items-center justify-between px-2.5 py-2.5 btn">
-              <div class="flex items-center gap-x-2">
-                <svg class="size-4"><use href="#icon-esim"></use></svg>
-                <span class="font-bold text-[13px]">My eSIM</span>
-              </div>
-              <svg class="size-3.5 text-font-tertiary"><use href="#icon-chevron-r"></use></svg>
-            </button>
-            <button class="flex items-center justify-between px-2.5 py-2.5 btn">
-              <div class="flex items-center gap-x-2">
-                <svg class="size-4"><use href="#icon-history"></use></svg>
-                <span class="font-bold text-[13px]">History</span>
-              </div>
-              <svg class="size-3.5 text-font-tertiary"><use href="#icon-chevron-r"></use></svg>
-            </button>
-            <div class="w-full h-[1px]" style="background:#4F596414"></div>
-            <button onclick="logout()" class="flex items-center justify-between px-2.5 py-2.5 btn">
-              <div class="flex items-center gap-x-2">
-                <svg class="size-4" style="color:#F64658"><use href="#icon-logout"></use></svg>
-                <span class="font-bold text-[13px]" style="color:#F64658">Logout</span>
-              </div>
-              <svg class="size-3.5" style="color:#F64658"><use href="#icon-chevron-r"></use></svg>
-            </button>
-          </div>
         </div>
         <button onclick="openMobileMenu()" class="tap44 btn text-white" aria-label="Open menu">
           <svg class="size-6" viewBox="0 0 24 24" fill="none"><path d="M4 7H20M4 12H20M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+        </button>
+      </div>
+      <div id="m-user-menu-panel" class="absolute right-4 top-14 flex flex-col bg-white w-[220px] rounded-[18px] shadow-lg text-font-primary p-2" style="display:none;z-index:45">
+        <div class="flex items-center justify-between px-2.5 py-2.5">
+          <div class="flex items-center gap-x-2">
+            <svg class="size-5"><use href="#coin-dollar"></use></svg>
+            <span class="font-bold text-[13px]">Balance</span>
+          </div>
+          <span class="font-bold text-[13px]">$68.75</span>
+        </div>
+        <div class="flex items-center justify-between px-2.5 py-2.5 gap-x-1">
+          <div class="flex items-center gap-x-2 min-w-0">
+            <svg class="size-5 shrink-0"><use href="#coin-rf"></use></svg>
+            <span class="font-bold text-[13px] shrink-0">Bonus</span>
+            <div class="relative shrink-0" id="m-rf-info-wrap">
+              <button onclick="toggleRfInfo(event,'m-rf-info-tooltip')" class="tap44 btn"><svg class="size-3.5"><use href="#icon-info"></use></svg></button>
+              <div id="m-rf-info-tooltip" class="absolute right-0 top-6 bg-white rounded-[14px] shadow-lg p-3" style="display:none;width:200px;max-width:65vw;z-index:46;border:1px solid #4F596429">
+                <span class="text-[12px] text-font-secondary leading-[18px]">RF is a bonus token which is provided separately from USD by revenue sharing program. More details about RF <a href="https://www.roamfi.net/reward/rule" target="_blank" class="font-bold" style="color:#0C1214;text-decoration:underline">here</a>.</span>
+              </div>
+            </div>
+          </div>
+          <span class="font-bold text-[13px] shrink-0">7437.71 RF</span>
+        </div>
+        <div class="w-full h-[1px]" style="background:#4F596414"></div>
+        <button class="flex items-center justify-between px-2.5 py-2.5 btn">
+          <div class="flex items-center gap-x-2">
+            <svg class="size-4"><use href="#icon-esim"></use></svg>
+            <span class="font-bold text-[13px]">My eSIM</span>
+          </div>
+          <svg class="size-3.5 text-font-tertiary"><use href="#icon-chevron-r"></use></svg>
+        </button>
+        <button class="flex items-center justify-between px-2.5 py-2.5 btn">
+          <div class="flex items-center gap-x-2">
+            <svg class="size-4"><use href="#icon-history"></use></svg>
+            <span class="font-bold text-[13px]">History</span>
+          </div>
+          <svg class="size-3.5 text-font-tertiary"><use href="#icon-chevron-r"></use></svg>
+        </button>
+        <div class="w-full h-[1px]" style="background:#4F596414"></div>
+        <button onclick="logout()" class="flex items-center justify-between px-2.5 py-2.5 btn">
+          <div class="flex items-center gap-x-2">
+            <svg class="size-4" style="color:#F64658"><use href="#icon-logout"></use></svg>
+            <span class="font-bold text-[13px]" style="color:#F64658">Logout</span>
+          </div>
+          <svg class="size-3.5" style="color:#F64658"><use href="#icon-chevron-r"></use></svg>
         </button>
       </div>
     </div>
@@ -2097,8 +2097,9 @@
         document.getElementById('rf-info-tooltip').style.display = 'none';
       }
       var mWrap = document.getElementById('m-user-menu-wrap');
-      if (mWrap && mWrap.style.display !== 'none' && !mWrap.contains(e.target)) {
-        document.getElementById('m-user-menu-panel').style.display = 'none';
+      var mPanel = document.getElementById('m-user-menu-panel');
+      if (mWrap && mWrap.style.display !== 'none' && !mWrap.contains(e.target) && mPanel && !mPanel.contains(e.target)) {
+        mPanel.style.display = 'none';
         document.getElementById('m-rf-info-tooltip').style.display = 'none';
       }
       var coWrap = document.getElementById('co-rf-info-wrap');
