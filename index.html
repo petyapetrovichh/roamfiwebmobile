@@ -96,22 +96,20 @@
   #mobile-header { position: fixed; left:0; right:0; top:0; z-index:40; }
   #mobile-header-spacer { height: calc(var(--mh) + env(safe-area-inset-top)); }
 
-  /* Slide-in menu drawer — driven by a class toggle (click/tap), never :hover,
-     since hover states don't exist on iOS Safari */
-  #mobile-menu { position: fixed; inset:0; z-index:50; visibility:hidden; }
-  #mobile-menu .scrim { position:absolute; inset:0; background:rgba(12,18,20,.5); opacity:0; transition:opacity .25s ease; }
-  #mobile-menu .panel { position:absolute; top:0; right:0; bottom:0; width:86%; max-width:360px; background:#fff;
-                         transform:translateX(100%); transition:transform .25s ease; overflow-y:auto;
-                         -webkit-overflow-scrolling:touch; }
-  #mobile-menu.open { visibility:visible; }
-  #mobile-menu.open .scrim { opacity:1; }
-  #mobile-menu.open .panel { transform:translateX(0); }
+  /* Full-screen menu overlay — driven by a class toggle (click/tap), never
+     :hover, since hover states don't exist on iOS Safari */
+  #mobile-menu { position: fixed; inset:0; z-index:50; background:rgba(12,18,20,.97);
+                  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+                  opacity:0; visibility:hidden; transition:opacity .2s ease;
+                  overflow-y:auto; -webkit-overflow-scrolling:touch; }
+  #mobile-menu.open { opacity:1; visibility:visible; }
   body.menu-open { overflow:hidden; }
 
-  .mnav-link { display:flex; align-items:center; justify-content:space-between; width:100%;
-               min-height:56px; padding:0 24px; font-weight:700; font-size:16px; text-align:left; }
-  .mnav-sub { display:flex; align-items:center; gap-x:10px; min-height:52px; padding:0 24px 0 40px;
-              font-size:15px; text-align:left; width:100%; }
+  .mnav-link { display:flex; align-items:center; gap-x:2; width:100%; min-height:44px;
+               padding:14px 0; font-weight:700; font-size:26px; color:#fff; text-align:left; }
+  .mnav-lang-row { display:flex; align-items:center; gap-x:12px; width:100%; min-height:44px;
+                    padding:12px 0; font-size:17px; color:#fff; text-align:left; }
+  .mnav-lang-row.active { color:#05E3F7; font-weight:700; }
 
   @media (max-width: 767px) {
     /* Fixed-pixel desktop diagram/card paddings don't fit a ~360px viewport — tighten them */
@@ -215,13 +213,41 @@
       <svg class="shrink-0 w-[104px] h-[22px] text-white cursor-pointer" onclick="showPage('home')"><use href="#navi-logo"></use></svg>
       <div class="flex items-center gap-x-3">
         <button class="btn text-white bg-white/10 rounded-full px-5 h-9 font-bold text-[14px] opacity-40" disabled>Login</button>
-        <button class="tap44 btn text-white opacity-40" aria-label="Menu" disabled>
+        <button onclick="openMobileMenu()" class="tap44 btn text-white" aria-label="Open menu">
           <svg class="size-6" viewBox="0 0 24 24" fill="none"><path d="M4 7H20M4 12H20M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
         </button>
       </div>
     </div>
   </header>
   <div id="mobile-header-spacer" class="md:hidden"></div>
+
+  <!-- ============ MENU (mobile, full-screen) ============ -->
+  <div id="mobile-menu" class="md:hidden safe-top safe-l safe-r safe-bottom">
+    <div class="flex items-center justify-end px-4" style="height:var(--mh)">
+      <button onclick="closeMobileMenu()" class="tap44 btn text-white" aria-label="Close menu"><svg class="size-6"><use href="#common-close"></use></svg></button>
+    </div>
+    <nav class="flex flex-col px-6 pb-10">
+      <button class="mnav-link btn" onclick="showPage('home','destinations');closeMobileMenu()">Destinations</button>
+      <button class="mnav-link btn" onclick="showPage('revenue-sharing');closeMobileMenu()">Revenue Sharing</button>
+      <button class="mnav-link btn" onclick="showPage('faq');closeMobileMenu()">FAQ</button>
+      <button class="mnav-link btn">Support</button>
+      <button class="mnav-link btn" onclick="toggleMobileLanguage()">
+        <span id="mnav-lang-current">English</span>
+        <svg id="mnav-lang-chevron" class="size-5 text-font-tertiary" style="transition:transform .2s"><use href="#common-dropdown"></use></svg>
+      </button>
+      <div id="mnav-language-list" style="display:none" class="flex flex-col pb-2">
+        <button class="mnav-lang-row btn active" onclick="selectMobileLanguage(this,'English')"><span class="fi fi-us rounded-[3px]" style="font-size:20px"></span><span>English</span></button>
+        <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'中文')"><span class="fi fi-cn rounded-[3px]" style="font-size:20px"></span><span>中文</span></button>
+        <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'Русский')"><span class="fi fi-ru rounded-[3px]" style="font-size:20px"></span><span>Русский</span></button>
+        <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'Deutsch')"><span class="fi fi-de rounded-[3px]" style="font-size:20px"></span><span>Deutsch</span></button>
+        <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'Italiano')"><span class="fi fi-it rounded-[3px]" style="font-size:20px"></span><span>Italiano</span></button>
+        <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'Español')"><span class="fi fi-es rounded-[3px]" style="font-size:20px"></span><span>Español</span></button>
+        <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'Français')"><span class="fi fi-fr rounded-[3px]" style="font-size:20px"></span><span>Français</span></button>
+        <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'日本語')"><span class="fi fi-jp rounded-[3px]" style="font-size:20px"></span><span>日本語</span></button>
+        <button class="mnav-lang-row btn" onclick="selectMobileLanguage(this,'한국어')"><span class="fi fi-kr rounded-[3px]" style="font-size:20px"></span><span>한국어</span></button>
+      </div>
+    </nav>
+  </div>
 
   <!-- ============ HEADER (desktop) ============ -->
   <header class="z-30 fixed left-0 top-0 right-0 w-full h-[64px] px-8 hidden md:flex flex-row items-center bg-primary">
@@ -346,7 +372,7 @@
     <div class="w-full md:h-[662px] bg-primary relative overflow-hidden">
       <div class="max-w-[1536px] mx-auto px-5 md:px-8 h-auto md:h-full">
       <div class="pt-8 pb-12 md:pt-[110px] md:pb-0 h-auto md:h-full text-white flex flex-col relative">
-        <img alt="bg" class="w-[290px] h-[290px] object-contain mx-auto mb-6 md:mb-0 md:w-[610px] md:h-[610px] md:object-fill md:absolute md:right-0 md:bottom-0" src="https://bres.talex.world/static/25d29ab1-7c02-47ac-beaf-bfdb82f50d29.png">
+        <img alt="bg" class="w-[290px] h-[290px] object-contain mx-auto -mb-16 md:mb-0 md:w-[610px] md:h-[610px] md:object-fill md:absolute md:right-0 md:bottom-0" src="https://bres.talex.world/static/25d29ab1-7c02-47ac-beaf-bfdb82f50d29.png">
         <div>
           <div class="font-medium text-[40px] leading-[46px] md:text-[60px] md:leading-none">eSIM<br>that pays you back</div>
           <div class="text-[18px] leading-[30px] md:text-[20px] md:leading-[30px] mt-3 md:mt-0">Stay connected in <span class="font-bold text-brand">200+</span> destinations with pay-as-you-go or destination plans.</div>
@@ -1903,6 +1929,28 @@
       document.getElementById('user-menu-panel').style.display = 'none';
       document.getElementById('user-menu-wrap').style.display = 'none';
       document.getElementById('login-btn').style.display = '';
+    }
+
+    /* ---- mobile menu ---- */
+    function openMobileMenu() {
+      document.getElementById('mobile-menu').classList.add('open');
+      document.body.classList.add('menu-open');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobile-menu').classList.remove('open');
+      document.body.classList.remove('menu-open');
+    }
+    function toggleMobileLanguage() {
+      var box = document.getElementById('mnav-language-list');
+      var chev = document.getElementById('mnav-lang-chevron');
+      var open = box.style.display !== 'none';
+      box.style.display = open ? 'none' : '';
+      chev.style.transform = open ? '' : 'rotate(180deg)';
+    }
+    function selectMobileLanguage(btn, label) {
+      document.querySelectorAll('.mnav-lang-row').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('mnav-lang-current').textContent = label;
     }
     function toggleUserMenu() {
       var panel = document.getElementById('user-menu-panel');
