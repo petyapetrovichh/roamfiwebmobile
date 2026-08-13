@@ -57,6 +57,10 @@
   .chip.active { background:#0C1214; color:#fff; border-color:#0C1214; }
   .sim-btn { padding:14px 0; border-radius:12px; border:1.5px solid #4F596429; text-align:center; font-weight:700; font-size:14px; cursor:pointer; background:#fff; color:#0C1214; }
   .sim-btn.active { border-color:#05E3F7; background:rgba(5,227,247,.08); }
+  .ph-row { display:grid; gap:8px; grid-template-columns:44px 1fr 78px 52px; padding:12px 16px; }
+  @media (min-width: 768px) {
+    .ph-row { gap:12px; grid-template-columns:100px 1fr 150px 70px; padding:16px 24px; }
+  }
   .stat-card { background:#F4F5F6; border-radius:16px; padding:24px; text-align:center; }
   .bar-track { flex:1; height:10px; border-radius:9999px; background:#F4F5F6; overflow:hidden; }
   .bar-fill { height:100%; border-radius:9999px; background:#05E3F7; }
@@ -105,9 +109,9 @@
   #mobile-menu.open { opacity:1; visibility:visible; }
   body.menu-open { overflow:hidden; }
 
-  .mnav-link { display:flex; align-items:center; gap-x:2; width:100%; min-height:44px;
+  .mnav-link { display:flex; align-items:center; gap:14px; width:100%; min-height:44px;
                padding:14px 0; font-weight:700; font-size:26px; color:#fff; text-align:left; }
-  .mnav-lang-row { display:flex; align-items:center; gap-x:12px; width:100%; min-height:44px;
+  .mnav-lang-row { display:flex; align-items:center; gap:16px; width:100%; min-height:44px;
                     padding:12px 0; font-size:17px; color:#fff; text-align:left; }
   .mnav-lang-row.active { color:#05E3F7; font-weight:700; }
 
@@ -116,6 +120,7 @@
     .diagram-card { padding:28px 18px; border-radius:20px; }
     .stat-card { padding:16px 10px; }
     .pill-teal { font-size:13px; padding:9px 14px; }
+    .sim-btn { padding:18px 4px; }
   }
 </style>
 </head>
@@ -221,6 +226,16 @@
   </header>
   <div id="mobile-header-spacer" class="md:hidden"></div>
 
+  <!-- ============ HEADER (mobile, checkout only) ============ -->
+  <header id="checkout-header" class="md:hidden bg-white items-center safe-top safe-l safe-r" style="height:var(--mh);position:fixed;left:0;right:0;top:0;z-index:40;display:none;border-bottom:1px solid #4F596414">
+    <div class="w-full grid grid-cols-[44px_1fr_44px] items-center px-2">
+      <button onclick="showPage('home')" class="tap44 btn justify-self-start" aria-label="Back">
+        <svg class="size-6" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+      <span class="font-bold text-[16px] text-center">Quick Checkout</span>
+    </div>
+  </header>
+
   <!-- ============ MENU (mobile, full-screen) ============ -->
   <div id="mobile-menu" class="md:hidden safe-top safe-l safe-r safe-bottom">
     <div class="flex items-center justify-end px-4" style="height:var(--mh)">
@@ -232,8 +247,9 @@
       <button class="mnav-link btn" onclick="showPage('faq');closeMobileMenu()">FAQ</button>
       <button class="mnav-link btn">Support</button>
       <button class="mnav-link btn" onclick="toggleMobileLanguage()">
+        <span id="mnav-lang-flag" class="fi fi-us rounded-[3px] shrink-0" style="font-size:24px"></span>
         <span id="mnav-lang-current">English</span>
-        <svg id="mnav-lang-chevron" class="size-5 text-font-tertiary" style="transition:transform .2s"><use href="#common-dropdown"></use></svg>
+        <svg id="mnav-lang-chevron" class="size-5 text-font-tertiary shrink-0" style="transition:transform .2s"><use href="#common-dropdown"></use></svg>
       </button>
       <div id="mnav-language-list" style="display:none" class="flex flex-col pb-2">
         <button class="mnav-lang-row btn active" onclick="selectMobileLanguage(this,'English')"><span class="fi fi-us rounded-[3px]" style="font-size:20px"></span><span>English</span></button>
@@ -554,9 +570,9 @@
       </div>
 
       <!-- ============ EXPLANATION TABS ============ -->
-      <div class="flex justify-center gap-x-4">
-        <button id="tab-simple" onclick="showExplanation('simple')" class="btn btn-brand flex-center font-bold text-[15px] h-[52px] rounded-full" style="width:220px">Simple explanation</button>
-        <button id="tab-detailed" onclick="showExplanation('detailed')" class="btn flex-center font-bold text-[15px] h-[52px] rounded-full" style="width:220px;background:#0C1214;color:#fff">Detailed explanation</button>
+      <div class="flex justify-center gap-x-3 md:gap-x-4">
+        <button id="tab-simple" onclick="showExplanation('simple')" class="btn btn-brand flex flex-col items-center justify-center leading-[1.15] font-bold text-[14px] md:text-[15px] h-[52px] rounded-full w-[150px] md:w-[220px]"><span>Quick</span><span>Overview</span></button>
+        <button id="tab-detailed" onclick="showExplanation('detailed')" class="btn flex flex-col items-center justify-center leading-[1.15] font-bold text-[14px] md:text-[15px] h-[52px] rounded-full w-[150px] md:w-[220px]" style="background:#0C1214;color:#fff"><span>Detailed</span><span>Explanation</span></button>
       </div>
 
       <div id="rs-simple" class="flex flex-col gap-y-[90px]">
@@ -566,7 +582,7 @@
         <span class="font-bold text-[22px] text-center">How money flows</span>
         <div class="diagram-card flex flex-col gap-y-10">
           <div class="flex flex-col gap-y-3">
-            <span class="font-bold text-[17px]">You purchased eSIM</span>
+            <span class="font-bold text-[14px] md:text-[17px]">You purchased eSIM</span>
             <svg width="100%" viewBox="0 0 960 430" role="img">
             <title>You purchase an eSIM and past buyers earn from it</title>
             <desc>Your purchase splits into provider cost and RoamFi business revenue, which splits 50/50 into RoamFi's revenue and the revenue sharing pool. The pool pays out to people who bought RoamFi eSIMs before you, at different times in the past.</desc>
@@ -613,7 +629,7 @@
           </div>
           <div class="w-full" style="height:1px;background:#4F596429"></div>
           <div class="flex flex-col gap-y-3">
-            <span class="font-bold text-[17px]">Someone purchased eSIM after you</span>
+            <span class="font-bold text-[14px] md:text-[17px]">Someone purchased eSIM after you</span>
             <svg width="100%" viewBox="0 0 960 430" role="img">
             <title>Someone else purchases an eSIM after you, and you earn from it</title>
             <desc>Someone else's purchase splits the same way. This time you are one of the past buyers, so you receive a share of the revenue sharing pool.</desc>
@@ -807,11 +823,11 @@
       <!-- ============ BUSINESS PROGRESS OVERVIEW ============ -->
       <div class="flex flex-col gap-y-6">
         <span class="font-bold text-[22px]">Business progress overview</span>
-        <div class="diagram-card" style="padding:36px 40px">
-          <div class="grid grid-cols-3 gap-4">
-            <div class="stat-card"><div class="font-bold text-[28px]">$26.3K</div><div class="caption mt-1">Total pool</div></div>
-            <div class="stat-card"><div class="font-bold text-[28px]">12.5K</div><div class="caption mt-1">eSIM buyers</div></div>
-            <div class="stat-card"><div class="font-bold text-[28px]">85.7K</div><div class="caption mt-1">eSIMs purchased</div></div>
+        <div class="diagram-card !px-4 !py-5 md:!px-10 md:!py-9">
+          <div class="grid grid-cols-3 gap-2 md:gap-4">
+            <div class="stat-card !px-2"><div class="font-bold text-[16px] md:text-[28px]">$26.3K</div><div class="caption mt-1">Total pool</div></div>
+            <div class="stat-card !px-2"><div class="font-bold text-[16px] md:text-[28px]">12.5K</div><div class="caption mt-1">eSIM buyers</div></div>
+            <div class="stat-card !px-2"><div class="font-bold text-[16px] md:text-[28px]">85.7K</div><div class="caption mt-1">eSIMs purchased</div></div>
           </div>
         </div>
       </div>
@@ -819,26 +835,26 @@
       <!-- ============ CURRENT REVENUE SHARING POOL ============ -->
       <div class="flex flex-col gap-y-6">
         <span class="font-bold text-[22px]">Current revenue sharing pool</span>
-        <div class="diagram-card flex flex-col gap-y-5" style="padding:36px 40px">
-          <div class="flex items-center gap-x-4">
-            <span class="font-bold text-[14px]" style="width:110px">Pool A (40%)</span>
+        <div class="diagram-card flex flex-col gap-y-5 !px-4 !py-5 md:!px-10 md:!py-9">
+          <div class="flex items-center gap-x-2 md:gap-x-4">
+            <span class="font-bold text-[12px] md:text-[14px] w-[72px] md:w-[110px] shrink-0">Pool A (40%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:6%"></div></div>
-            <span class="font-bold text-[14px]" style="width:60px;text-align:right">$18</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[42px] md:w-[60px] shrink-0 text-right">$18</span>
           </div>
-          <div class="flex items-center gap-x-4">
-            <span class="font-bold text-[14px]" style="width:110px">Pool B (30%)</span>
+          <div class="flex items-center gap-x-2 md:gap-x-4">
+            <span class="font-bold text-[12px] md:text-[14px] w-[72px] md:w-[110px] shrink-0">Pool B (30%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:14%"></div></div>
-            <span class="font-bold text-[14px]" style="width:60px;text-align:right">$210</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[42px] md:w-[60px] shrink-0 text-right">$210</span>
           </div>
-          <div class="flex items-center gap-x-4">
-            <span class="font-bold text-[14px]" style="width:110px">Pool C (20%)</span>
+          <div class="flex items-center gap-x-2 md:gap-x-4">
+            <span class="font-bold text-[12px] md:text-[14px] w-[72px] md:w-[110px] shrink-0">Pool C (20%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:48%"></div></div>
-            <span class="font-bold text-[14px]" style="width:60px;text-align:right">$1.4K</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[42px] md:w-[60px] shrink-0 text-right">$1.4K</span>
           </div>
-          <div class="flex items-center gap-x-4">
-            <span class="font-bold text-[14px]" style="width:110px">Pool D (10%)</span>
+          <div class="flex items-center gap-x-2 md:gap-x-4">
+            <span class="font-bold text-[12px] md:text-[14px] w-[72px] md:w-[110px] shrink-0">Pool D (10%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
-            <span class="font-bold text-[14px]" style="width:60px;text-align:right">$6.8K</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[42px] md:w-[60px] shrink-0 text-right">$6.8K</span>
           </div>
         </div>
       </div>
@@ -849,7 +865,7 @@
         <div class="diagram-card flex flex-col gap-y-6">
           <div class="flex flex-col gap-y-3">
             <span class="font-bold text-[14px]">1. Your eSIM purchase amount</span>
-            <div class="grid grid-cols-6 gap-2" id="sim-amount">
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-2" id="sim-amount">
               <div class="sim-btn active" data-val="1">$1</div>
               <div class="sim-btn" data-val="5">$5</div>
               <div class="sim-btn" data-val="10">$10</div>
@@ -861,7 +877,7 @@
           <div class="flex flex-col gap-y-3">
             <span class="font-bold text-[14px]">2. If RoamFi business generates revenue per day</span>
             <span class="caption" style="text-align:left">Total net revenue from all future eSIM purchases combined</span>
-            <div class="grid grid-cols-5 gap-2" id="sim-revenue">
+            <div class="grid grid-cols-3 md:grid-cols-5 gap-2" id="sim-revenue">
               <div class="sim-btn" data-val="100">$100</div>
               <div class="sim-btn active" data-val="1000">$1K</div>
               <div class="sim-btn" data-val="10000">$10K</div>
@@ -893,11 +909,11 @@
       <!-- ============ MY STATS ============ -->
       <div class="flex flex-col gap-y-6">
         <span class="font-bold text-[22px]">My stats</span>
-        <div class="diagram-card" style="padding:36px 40px">
-          <div class="grid grid-cols-3 gap-4">
-            <div class="stat-card"><div class="font-bold text-[28px]">$0</div><div class="caption mt-1">Total earned</div></div>
-            <div class="stat-card"><div class="font-bold text-[28px]">0%</div><div class="caption mt-1">Current weight</div></div>
-            <div class="stat-card"><div class="font-bold text-[28px]">0</div><div class="caption mt-1">Eligible eSIM purchases</div></div>
+        <div class="diagram-card !px-4 !py-5 md:!px-10 md:!py-9">
+          <div class="grid grid-cols-3 gap-2 md:gap-4">
+            <div class="stat-card !px-2"><div class="font-bold text-[16px] md:text-[28px]">$0</div><div class="caption mt-1">Total earned</div></div>
+            <div class="stat-card !px-2"><div class="font-bold text-[16px] md:text-[28px]">0%</div><div class="caption mt-1">Current weight</div></div>
+            <div class="stat-card !px-2"><div class="font-bold text-[16px] md:text-[28px]">0</div><div class="caption mt-1">Eligible eSIM purchases</div></div>
           </div>
         </div>
       </div>
@@ -912,36 +928,46 @@
           <button class="chip">Monthly</button>
           <button class="chip active">All</button>
         </div>
-        <div class="diagram-card flex flex-col gap-y-4" style="padding:32px">
-          <div class="flex items-center gap-x-4">
-            <span class="font-bold text-[14px]" style="width:20px">1</span>
-            <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">ML</div>
+        <div class="diagram-card flex flex-col gap-y-4 !px-4 !py-4 md:!p-8">
+          <div class="flex items-center gap-x-3 md:gap-x-4">
+            <div class="relative shrink-0">
+              <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">ML</div>
+              <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">1</span>
+            </div>
             <div class="flex-1"><div class="font-bold text-[14px]">Marcus L.</div><div class="caption" style="text-align:left">445 eligible eSIM purchases · 6.07% current weight</div></div>
-            <span class="font-bold text-[14px]" style="color:#0F6E56">+$1,950</span>
+            <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$1,950</span>
           </div>
-          <div class="flex items-center gap-x-4">
-            <span class="font-bold text-[14px]" style="width:20px">2</span>
-            <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">JP</div>
+          <div class="flex items-center gap-x-3 md:gap-x-4">
+            <div class="relative shrink-0">
+              <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">JP</div>
+              <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">2</span>
+            </div>
             <div class="flex-1"><div class="font-bold text-[14px]">Jay Patel</div><div class="caption" style="text-align:left">856 eligible eSIM purchases · 1.18% current weight</div></div>
-            <span class="font-bold text-[14px]" style="color:#0F6E56">+$960</span>
+            <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$960</span>
           </div>
-          <div class="flex items-center gap-x-4">
-            <span class="font-bold text-[14px]" style="width:20px">3</span>
-            <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">SM</div>
+          <div class="flex items-center gap-x-3 md:gap-x-4">
+            <div class="relative shrink-0">
+              <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">SM</div>
+              <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">3</span>
+            </div>
             <div class="flex-1"><div class="font-bold text-[14px]">Sasha M.</div><div class="caption" style="text-align:left">213 eligible eSIM purchases · 3.75% current weight</div></div>
-            <span class="font-bold text-[14px]" style="color:#0F6E56">+$687</span>
+            <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$687</span>
           </div>
-          <div class="flex items-center gap-x-4">
-            <span class="font-bold text-[14px]" style="width:20px">4</span>
-            <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">AK</div>
+          <div class="flex items-center gap-x-3 md:gap-x-4">
+            <div class="relative shrink-0">
+              <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">AK</div>
+              <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">4</span>
+            </div>
             <div class="flex-1"><div class="font-bold text-[14px]">Aria Khan</div><div class="caption" style="text-align:left">260 eligible eSIM purchases · 5.22% current weight</div></div>
-            <span class="font-bold text-[14px]" style="color:#0F6E56">+$400</span>
+            <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$400</span>
           </div>
-          <div class="flex items-center gap-x-4">
-            <span class="font-bold text-[14px]" style="width:20px">5</span>
-            <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">KN</div>
+          <div class="flex items-center gap-x-3 md:gap-x-4">
+            <div class="relative shrink-0">
+              <div class="size-[44px] rounded-full flex-center" style="background:#0C1214;color:#fff;font-weight:700;font-size:13px">KN</div>
+              <span class="absolute -top-1 -left-1 size-[18px] rounded-full flex-center bg-brand text-font-primary font-bold" style="font-size:10px">5</span>
+            </div>
             <div class="flex-1"><div class="font-bold text-[14px]">Kai N.</div><div class="caption" style="text-align:left">178 eligible eSIM purchases · 2.43% current weight</div></div>
-            <span class="font-bold text-[14px]" style="color:#0F6E56">+$120</span>
+            <span class="font-bold text-[14px] shrink-0" style="color:#0F6E56">+$120</span>
           </div>
         </div>
       </div>
@@ -951,47 +977,47 @@
         <span class="font-bold text-[22px]">RoamFi eSIM purchases history</span>
         <span class="text-[13px] text-font-tertiary">Full transparency — every eSIM purchase made on RoamFi, in real time.</span>
         <div class="rounded-[20px] overflow-hidden" style="border:1px solid #4F596429;background:#fff">
-          <div class="grid gap-3 px-6 py-4" style="grid-template-columns:100px 1fr 150px 70px;border-bottom:1px solid #4F596429">
-            <span class="text-[13px]" style="color:#9AA0A6">Order ID</span>
-            <span class="text-[13px]" style="color:#9AA0A6">eSIM</span>
-            <span class="text-[13px]" style="color:#9AA0A6">Purchased</span>
-            <span class="text-[13px] text-right" style="color:#9AA0A6">Price</span>
+          <div class="ph-row" style="border-bottom:1px solid #4F596429">
+            <span class="text-[12px] md:text-[13px]" style="color:#9AA0A6">Order ID</span>
+            <span class="text-[12px] md:text-[13px]" style="color:#9AA0A6">eSIM</span>
+            <span class="text-[12px] md:text-[13px]" style="color:#9AA0A6">Purchased</span>
+            <span class="text-[12px] md:text-[13px] text-right" style="color:#9AA0A6">Price</span>
           </div>
-          <div class="grid gap-3 px-6 py-4" style="grid-template-columns:100px 1fr 150px 70px;border-bottom:1px solid #4F596414">
-            <span class="text-[13px]">849213</span>
-            <span class="text-[14px]">eSIM — Japan, 5GB / 7 days</span>
-            <span class="text-[13px] text-font-secondary">Aug 6, 2026, 14:32</span>
-            <span class="text-[14px] text-right">$12.00</span>
+          <div class="ph-row" style="border-bottom:1px solid #4F596414">
+            <span class="text-[11px] md:text-[13px]">849213</span>
+            <span class="text-[13px] md:text-[14px]">eSIM — Japan, 5GB / 7 days</span>
+            <div class="flex flex-col md:flex-row md:gap-x-1"><span class="text-[11px] md:text-[13px] text-font-secondary">Aug 6, 2026,</span><span class="text-[11px] md:text-[13px] text-font-secondary">14:32</span></div>
+            <span class="text-[13px] md:text-[14px] text-right">$12.00</span>
           </div>
-          <div class="grid gap-3 px-6 py-4" style="grid-template-columns:100px 1fr 150px 70px;border-bottom:1px solid #4F596414">
-            <span class="text-[13px]">849187</span>
-            <span class="text-[14px]">eSIM — Singapore, 3GB / 5 days</span>
-            <span class="text-[13px] text-font-secondary">Aug 6, 2026, 11:05</span>
-            <span class="text-[14px] text-right">$8.50</span>
+          <div class="ph-row" style="border-bottom:1px solid #4F596414">
+            <span class="text-[11px] md:text-[13px]">849187</span>
+            <span class="text-[13px] md:text-[14px]">eSIM — Singapore, 3GB / 5 days</span>
+            <div class="flex flex-col md:flex-row md:gap-x-1"><span class="text-[11px] md:text-[13px] text-font-secondary">Aug 6, 2026,</span><span class="text-[11px] md:text-[13px] text-font-secondary">11:05</span></div>
+            <span class="text-[13px] md:text-[14px] text-right">$8.50</span>
           </div>
-          <div class="grid gap-3 px-6 py-4" style="grid-template-columns:100px 1fr 150px 70px;border-bottom:1px solid #4F596414">
-            <span class="text-[13px]">849154</span>
-            <span class="text-[14px]">eSIM — United States, 10GB / 30 days</span>
-            <span class="text-[13px] text-font-secondary">Aug 5, 2026, 22:47</span>
-            <span class="text-[14px] text-right">$24.00</span>
+          <div class="ph-row" style="border-bottom:1px solid #4F596414">
+            <span class="text-[11px] md:text-[13px]">849154</span>
+            <span class="text-[13px] md:text-[14px]">eSIM — United States, 10GB / 30 days</span>
+            <div class="flex flex-col md:flex-row md:gap-x-1"><span class="text-[11px] md:text-[13px] text-font-secondary">Aug 5, 2026,</span><span class="text-[11px] md:text-[13px] text-font-secondary">22:47</span></div>
+            <span class="text-[13px] md:text-[14px] text-right">$24.00</span>
           </div>
-          <div class="grid gap-3 px-6 py-4" style="grid-template-columns:100px 1fr 150px 70px;border-bottom:1px solid #4F596414">
-            <span class="text-[13px]">849098</span>
-            <span class="text-[14px]">eSIM — Germany, 5GB / 10 days</span>
-            <span class="text-[13px] text-font-secondary">Aug 5, 2026, 16:13</span>
-            <span class="text-[14px] text-right">$11.00</span>
+          <div class="ph-row" style="border-bottom:1px solid #4F596414">
+            <span class="text-[11px] md:text-[13px]">849098</span>
+            <span class="text-[13px] md:text-[14px]">eSIM — Germany, 5GB / 10 days</span>
+            <div class="flex flex-col md:flex-row md:gap-x-1"><span class="text-[11px] md:text-[13px] text-font-secondary">Aug 5, 2026,</span><span class="text-[11px] md:text-[13px] text-font-secondary">16:13</span></div>
+            <span class="text-[13px] md:text-[14px] text-right">$11.00</span>
           </div>
-          <div class="grid gap-3 px-6 py-4" style="grid-template-columns:100px 1fr 150px 70px;border-bottom:1px solid #4F596414">
-            <span class="text-[13px]">849051</span>
-            <span class="text-[14px]">eSIM — Turkey, 3GB / 7 days</span>
-            <span class="text-[13px] text-font-secondary">Aug 5, 2026, 09:28</span>
-            <span class="text-[14px] text-right">$9.00</span>
+          <div class="ph-row" style="border-bottom:1px solid #4F596414">
+            <span class="text-[11px] md:text-[13px]">849051</span>
+            <span class="text-[13px] md:text-[14px]">eSIM — Turkey, 3GB / 7 days</span>
+            <div class="flex flex-col md:flex-row md:gap-x-1"><span class="text-[11px] md:text-[13px] text-font-secondary">Aug 5, 2026,</span><span class="text-[11px] md:text-[13px] text-font-secondary">09:28</span></div>
+            <span class="text-[13px] md:text-[14px] text-right">$9.00</span>
           </div>
-          <div class="grid gap-3 px-6 py-4" style="grid-template-columns:100px 1fr 150px 70px">
-            <span class="text-[13px]">848997</span>
-            <span class="text-[14px]">eSIM — Thailand, 20GB / 30 days</span>
-            <span class="text-[13px] text-font-secondary">Aug 4, 2026, 20:56</span>
-            <span class="text-[14px] text-right">$29.00</span>
+          <div class="ph-row">
+            <span class="text-[11px] md:text-[13px]">848997</span>
+            <span class="text-[13px] md:text-[14px]">eSIM — Thailand, 20GB / 30 days</span>
+            <div class="flex flex-col md:flex-row md:gap-x-1"><span class="text-[11px] md:text-[13px] text-font-secondary">Aug 4, 2026,</span><span class="text-[11px] md:text-[13px] text-font-secondary">20:56</span></div>
+            <span class="text-[13px] md:text-[14px] text-right">$29.00</span>
           </div>
         </div>
       </div>
@@ -1002,75 +1028,75 @@
 
   <!-- ============ CHECKOUT PAGE ============ -->
   <main id="page-checkout" class="page" style="background:#F7F8F9;display:none">
-    <div style="max-width:960px;margin:0 auto;padding:150px 32px 120px;">
-      <div class="grid grid-cols-2 gap-8">
+    <div class="max-w-[960px] mx-auto px-5 md:px-8 pt-6 pb-16 md:pt-[150px] md:pb-[120px]">
+      <div class="flex flex-col gap-y-6 md:grid md:grid-cols-2 md:gap-8">
 
-        <!-- LEFT COLUMN -->
-        <div class="flex flex-col gap-y-6">
-          <div class="rounded-[20px] p-8" style="background:#fff;border:1px solid #4F596429">
-            <div class="flex items-center justify-between mb-4">
-              <span class="font-medium text-[20px]">Your details</span>
-              <button class="btn"><svg class="size-5"><use href="#icon-logout"></use></svg></button>
-            </div>
-            <span class="text-[15px]">oppmisis <span class="text-font-tertiary text-[14px]">(login via email oppmisis@gmail.com)</span></span>
-          </div>
-
-          <div class="rounded-[20px] p-8 flex items-center justify-between" style="background:#fff;border:1px solid #4F596429">
-            <span class="font-medium text-[20px]">Payment Method</span>
-            <span class="text-[15px] text-font-secondary">Bank Card</span>
-          </div>
-
-          <div class="rounded-[20px]" style="min-height:560px;background:linear-gradient(100deg,#EEF0F2,#F8F9FA 40%,#E4E7EA 70%,#F4F5F6)"></div>
-        </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="flex flex-col gap-y-6">
-          <div class="rounded-[20px] p-8 flex flex-col gap-y-5" style="background:#fff;border:1px solid #4F596429">
-            <span class="font-medium text-[20px]">Purchase Summary</span>
+        <!-- GROUP A: Purchase Summary + Total Amount -->
+        <div class="flex flex-col gap-y-6 md:order-2">
+          <div class="rounded-[20px] p-6 md:p-8 flex flex-col gap-y-5" style="background:#fff;border:1px solid #4F596429">
+            <span class="font-medium text-[18px] md:text-[20px]">Purchase Summary</span>
 
             <div class="flex items-center justify-between pb-4" style="border-bottom:1px solid #4F596414">
-              <span class="text-[15px] text-font-secondary">Data</span>
-              <span id="co-data" class="text-[15px] font-medium">5GB/total</span>
+              <span class="text-[14px] md:text-[15px] text-font-secondary">Data</span>
+              <span id="co-data" class="text-[14px] md:text-[15px] font-medium">5GB/total</span>
             </div>
             <div class="flex items-center justify-between pb-4" style="border-bottom:1px solid #4F596414">
-              <span class="text-[15px] text-font-secondary">Coverage</span>
-              <span id="co-coverage" class="text-[15px] font-medium">United States</span>
+              <span class="text-[14px] md:text-[15px] text-font-secondary">Coverage</span>
+              <span id="co-coverage" class="text-[14px] md:text-[15px] font-medium">United States</span>
             </div>
             <div class="flex items-center justify-between pb-4" style="border-bottom:1px solid #4F596414">
-              <span class="text-[15px] text-font-secondary">Validity</span>
-              <span id="co-validity" class="text-[15px] font-medium">3 days</span>
+              <span class="text-[14px] md:text-[15px] text-font-secondary">Validity</span>
+              <span id="co-validity" class="text-[14px] md:text-[15px] font-medium">3 days</span>
             </div>
             <div class="flex items-center justify-between pb-4" style="border-bottom:1px solid #4F596414">
-              <span class="text-[15px] text-font-secondary">Price</span>
-              <span id="co-price" class="text-[15px] font-medium">$ 8.14</span>
+              <span class="text-[14px] md:text-[15px] text-font-secondary">Price</span>
+              <span id="co-price" class="text-[14px] md:text-[15px] font-medium">$ 8.14</span>
             </div>
 
-            <span class="font-medium text-[18px] mt-2">You will receive</span>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-x-2">
-                <svg class="size-5"><use href="#coin-dollar"></use></svg>
-                <span class="text-[15px]"><span class="font-bold">X USD</span> (Balance) from revenue sharing</span>
+            <span class="font-medium text-[16px] md:text-[18px] mt-2">You will receive</span>
+            <div class="flex items-center justify-between gap-x-2">
+              <div class="flex items-center gap-x-2 min-w-0">
+                <svg class="size-5 shrink-0"><use href="#coin-dollar"></use></svg>
+                <span class="text-[13px] md:text-[15px] truncate"><span class="font-bold">X USD</span> (Balance) from revenue sharing</span>
               </div>
-              <button onclick="showPage('revenue-sharing')" class="btn text-[14px] text-font-tertiary flex items-center gap-x-1">Rule<svg class="size-3"><use href="#icon-chevron-r"></use></svg></button>
+              <button onclick="showPage('revenue-sharing')" class="btn shrink-0 text-[13px] md:text-[14px] text-font-tertiary flex items-center gap-x-1">Rule<svg class="size-3"><use href="#icon-chevron-r"></use></svg></button>
             </div>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-x-2">
-                <svg class="size-5"><use href="#coin-rf"></use></svg>
-                <span class="text-[15px]"><span class="font-bold">202.08</span> RF (Bonus)</span>
+            <div class="flex items-center justify-between gap-x-2">
+              <div class="flex items-center gap-x-2 min-w-0">
+                <svg class="size-5 shrink-0"><use href="#coin-rf"></use></svg>
+                <span class="text-[13px] md:text-[15px] truncate"><span class="font-bold">202.08</span> RF (Bonus)</span>
               </div>
-              <div class="relative" id="co-rf-info-wrap">
-                <button onclick="toggleRfInfo(event,'co-rf-info-tooltip')" class="btn"><svg class="size-4"><use href="#icon-info"></use></svg></button>
-                <div id="co-rf-info-tooltip" class="absolute right-0 top-6 bg-white rounded-[14px] shadow-lg p-4" style="display:none;width:260px;z-index:30;border:1px solid #4F596429">
+              <div class="relative shrink-0" id="co-rf-info-wrap">
+                <button onclick="toggleRfInfo(event,'co-rf-info-tooltip')" class="tap44 btn"><svg class="size-4"><use href="#icon-info"></use></svg></button>
+                <div id="co-rf-info-tooltip" class="absolute right-0 top-6 bg-white rounded-[14px] shadow-lg p-4" style="display:none;width:230px;max-width:70vw;z-index:30;border:1px solid #4F596429">
                   <span class="text-[13px] text-font-secondary leading-[20px]">RF is a bonus token which is provided separately from USD by revenue sharing program. More details about RF <a href="https://www.roamfi.net/reward/rule" target="_blank" class="font-bold" style="color:#0C1214;text-decoration:underline">here</a>.</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="rounded-[20px] p-8 flex items-center justify-between" style="background:#fff;border:1px solid #4F596429">
-            <span class="text-[15px] text-font-secondary">Total Amount</span>
-            <span id="co-total" class="font-bold text-[18px]">$ 8.14</span>
+          <div class="rounded-[20px] p-6 md:p-8 flex items-center justify-between" style="background:#fff;border:1px solid #4F596429">
+            <span class="text-[14px] md:text-[15px] text-font-secondary">Total Amount</span>
+            <span id="co-total" class="font-bold text-[17px] md:text-[18px]">$ 8.14</span>
           </div>
+        </div>
+
+        <!-- GROUP B: Your details + Payment Method + card art -->
+        <div class="flex flex-col gap-y-6 md:order-1">
+          <div class="rounded-[20px] p-6 md:p-8" style="background:#fff;border:1px solid #4F596429">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-medium text-[18px] md:text-[20px]">Your details</span>
+              <button class="tap44 btn"><svg class="size-5"><use href="#icon-logout"></use></svg></button>
+            </div>
+            <span class="text-[14px] md:text-[15px]">oppmisis <span class="text-font-tertiary text-[13px] md:text-[14px]">(login via email oppmisis@gmail.com)</span></span>
+          </div>
+
+          <div class="rounded-[20px] p-6 md:p-8 flex items-center justify-between" style="background:#fff;border:1px solid #4F596429">
+            <span class="font-medium text-[18px] md:text-[20px]">Payment Method</span>
+            <span class="text-[14px] md:text-[15px] text-font-secondary">Bank Card</span>
+          </div>
+
+          <div class="rounded-[20px] h-[140px] md:h-auto md:min-h-[560px]" style="background:linear-gradient(100deg,#EEF0F2,#F8F9FA 40%,#E4E7EA 70%,#F4F5F6)"></div>
         </div>
 
       </div>
@@ -1809,7 +1835,7 @@
               <svg id="faq-chevron-40" class="size-4 text-font-tertiary shrink-0" style="transition:transform .2s"><use href="#common-dropdown"></use></svg>
             </button>
             <div id="faq-answer-40" class="px-6 pb-5" style="display:none">
-              <span class="text-[14px] text-font-secondary leading-[22px]">The full rules — exactly how much you earn per purchase and per referral — are published on a dedicated page: roamfi.net/reward/rule. This FAQ only covers the general mechanics.</span>
+              <span class="text-[14px] text-font-secondary leading-[22px]">The full rules — exactly how much you earn per purchase and per referral — are published on a dedicated page: <a href="https://www.roamfi.net/reward/rule" class="text-brand underline font-medium" target="_blank">roamfi.net/reward/rule</a>. This FAQ only covers the general mechanics.</span>
             </div>
           </div>
         </div>
@@ -1883,6 +1909,15 @@
   function showPage(id, anchor) {
     document.querySelectorAll('.page').forEach(function(p) { p.style.display = 'none'; });
     document.getElementById('page-' + id).style.display = '';
+    var mh = document.getElementById('mobile-header');
+    var ch = document.getElementById('checkout-header');
+    if (id === 'checkout') {
+      mh.style.display = 'none';
+      ch.style.display = '';
+    } else {
+      mh.style.display = '';
+      ch.style.display = 'none';
+    }
     location.hash = id === 'home' && !anchor ? '' : (anchor || id);
     if (anchor) {
       setTimeout(function() {
@@ -1958,6 +1993,13 @@
       document.querySelectorAll('.mnav-lang-row').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
       document.getElementById('mnav-lang-current').textContent = label;
+      var srcFlag = btn.querySelector('.fi');
+      var previewFlag = document.getElementById('mnav-lang-flag');
+      if (srcFlag && previewFlag) {
+        var countryClass = Array.prototype.find.call(srcFlag.classList, function(c) { return c !== 'fi' && c.indexOf('fi-') === 0; });
+        previewFlag.classList.forEach(function(c) { if (c.indexOf('fi-') === 0) previewFlag.classList.remove(c); });
+        if (countryClass) previewFlag.classList.add(countryClass);
+      }
     }
     function toggleUserMenu() {
       var panel = document.getElementById('user-menu-panel');
@@ -1986,20 +2028,21 @@
       var detailed = document.getElementById('rs-detailed');
       var tabSimple = document.getElementById('tab-simple');
       var tabDetailed = document.getElementById('tab-detailed');
+      var baseClass = 'btn flex flex-col items-center justify-center leading-[1.15] font-bold text-[14px] md:text-[15px] h-[52px] rounded-full w-[150px] md:w-[220px]';
       if (which === 'simple') {
         simple.style.display = '';
         detailed.style.display = 'none';
-        tabSimple.className = 'btn btn-brand flex-center font-bold text-[15px] h-[52px] rounded-full';
-        tabSimple.style.cssText = 'width:220px';
-        tabDetailed.className = 'btn flex-center font-bold text-[15px] h-[52px] rounded-full';
-        tabDetailed.style.cssText = 'width:220px;background:#0C1214;color:#fff';
+        tabSimple.className = baseClass + ' btn-brand';
+        tabSimple.style.cssText = '';
+        tabDetailed.className = baseClass;
+        tabDetailed.style.cssText = 'background:#0C1214;color:#fff';
       } else {
         detailed.style.display = '';
         simple.style.display = 'none';
-        tabDetailed.className = 'btn btn-brand flex-center font-bold text-[15px] h-[52px] rounded-full';
-        tabDetailed.style.cssText = 'width:220px';
-        tabSimple.className = 'btn flex-center font-bold text-[15px] h-[52px] rounded-full';
-        tabSimple.style.cssText = 'width:220px;background:#0C1214;color:#fff';
+        tabDetailed.className = baseClass + ' btn-brand';
+        tabDetailed.style.cssText = '';
+        tabSimple.className = baseClass;
+        tabSimple.style.cssText = 'background:#0C1214;color:#fff';
       }
     }
     showExplanation('simple');
