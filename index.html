@@ -212,54 +212,13 @@
   <!-- ============ HEADER (mobile) ============ -->
   <header id="mobile-header" class="flex md:hidden flex-row items-center bg-primary safe-top safe-l safe-r" style="height:var(--mh)">
     <div class="w-full flex flex-row items-center justify-between px-4">
-      <svg class="shrink-0 w-[104px] h-[22px] text-white cursor-pointer" onclick="showPage('home');closeMobileMenu()"><use href="#navi-logo"></use></svg>
-      <button onclick="openMobileMenu()" class="tap44 btn text-white" aria-label="Open menu">
+      <svg class="shrink-0 w-[104px] h-[22px] text-white cursor-pointer" onclick="showPage('home')"><use href="#navi-logo"></use></svg>
+      <button class="tap44 btn text-white opacity-40" aria-label="Menu" disabled>
         <svg class="size-6" viewBox="0 0 24 24" fill="none"><path d="M4 7H20M4 12H20M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
       </button>
     </div>
   </header>
   <div id="mobile-header-spacer" class="md:hidden"></div>
-
-  <!-- ============ MENU DRAWER (mobile) ============ -->
-  <div id="mobile-menu" class="md:hidden">
-    <div class="scrim" onclick="closeMobileMenu()"></div>
-    <div class="panel safe-top safe-r safe-bottom flex flex-col">
-      <div class="flex items-center justify-between px-4" style="height:var(--mh)">
-        <span class="font-bold text-[15px]">Menu</span>
-        <button onclick="closeMobileMenu()" class="tap44 btn" aria-label="Close menu"><svg class="size-6"><use href="#common-close"></use></svg></button>
-      </div>
-      <div class="w-full h-[1px]" style="background:#4F596414"></div>
-
-      <div class="flex flex-col py-2">
-        <button class="mnav-link btn" onclick="toggleMobileDestinations()">
-          <span>Destinations</span>
-          <svg id="mnav-dest-chevron" class="size-4 text-font-tertiary" style="transition:transform .2s"><use href="#common-dropdown"></use></svg>
-        </button>
-        <div id="mnav-destinations" style="display:none" class="flex flex-col pb-2">
-          <button class="mnav-sub btn" onclick="goToCheckout('United States');closeMobileMenu()"><span class="fi fi-us rounded-[3px]" style="font-size:20px"></span><span>United States</span></button>
-          <button class="mnav-sub btn" onclick="goToCheckout('United Kingdom');closeMobileMenu()"><span class="fi fi-gb rounded-[3px]" style="font-size:20px"></span><span>United Kingdom</span></button>
-          <button class="mnav-sub btn" onclick="goToCheckout('Japan');closeMobileMenu()"><span class="fi fi-jp rounded-[3px]" style="font-size:20px"></span><span>Japan</span></button>
-          <button class="mnav-sub btn" onclick="goToCheckout('Thailand');closeMobileMenu()"><span class="fi fi-th rounded-[3px]" style="font-size:20px"></span><span>Thailand</span></button>
-          <button class="mnav-sub btn" onclick="showPage('home','destinations');closeMobileMenu()" style="color:#5D6164"><span>All destinations →</span></button>
-        </div>
-        <button class="mnav-link btn" onclick="showPage('revenue-sharing');closeMobileMenu()"><span>Revenue Sharing</span></button>
-        <button class="mnav-link btn" onclick="showPage('faq');closeMobileMenu()"><span>FAQ</span></button>
-        <button class="mnav-link btn"><span>Support</span></button>
-      </div>
-
-      <div class="mt-auto flex flex-col gap-y-3 p-4" style="border-top:1px solid #4F596414">
-        <button id="mnav-login-btn" class="btn btn-outline-primary w-full h-[48px] rounded-full font-bold" onclick="closeMobileMenu();document.getElementById('modal-login').classList.add('open')">Login</button>
-        <div id="mnav-user-row" style="display:none" class="flex items-center justify-between px-1">
-          <div class="flex items-center gap-x-3">
-            <div class="size-[36px] rounded-full" style="background:conic-gradient(#F64658 0deg 90deg,#FAC775 90deg 180deg,#639922 180deg 270deg,#378ADD 270deg 360deg)"></div>
-            <div class="flex flex-col"><span class="font-bold text-[14px]">$68.75 <span class="font-normal text-font-tertiary">Balance</span></span></div>
-          </div>
-          <button class="btn text-[13px] font-bold" style="color:#F64658" onclick="logout()">Logout</button>
-        </div>
-        <button class="btn btn-brand w-full h-[48px] rounded-full font-bold flex-center gap-x-2"><span>Get the App</span><svg class="size-5"><use href="#navi-apple"></use></svg><svg class="size-5"><use href="#navi-google"></use></svg></button>
-      </div>
-    </div>
-  </div>
 
   <!-- ============ HEADER (desktop) ============ -->
   <header class="z-30 fixed left-0 top-0 right-0 w-full h-[64px] px-8 hidden md:flex flex-row items-center bg-primary">
@@ -386,9 +345,9 @@
       <div class="pt-8 pb-12 md:pt-[110px] md:pb-0 h-auto md:h-full text-white flex flex-col relative">
         <img alt="bg" class="w-[220px] h-[220px] object-contain mx-auto mb-6 md:mb-0 md:w-[610px] md:h-[610px] md:object-fill md:absolute md:right-0 md:bottom-0" src="https://bres.talex.world/static/25d29ab1-7c02-47ac-beaf-bfdb82f50d29.png">
         <div>
-          <div class="font-medium text-[34px] leading-[40px] md:text-[60px] md:leading-none">eSIM that pays you back</div>
-          <div class="text-[16px] leading-[24px] md:text-[20px] md:leading-[30px] mt-3 md:mt-0">Stay connected in <span class="font-bold text-brand">200+</span> destinations with pay-as-you-go or destination plans.</div>
-          <div class="text-[16px] leading-[24px] md:text-[20px] md:leading-[30px]">Earn <span class="font-bold text-brand">USD</span> back from every eSIM purchase made by others worldwide.</div>
+          <div class="font-medium text-[40px] leading-[46px] md:text-[60px] md:leading-none">eSIM<br>that pays you back</div>
+          <div class="text-[18px] leading-[30px] md:text-[20px] md:leading-[30px] mt-3 md:mt-0">Stay connected in <span class="font-bold text-brand">200+</span> destinations with pay-as-you-go or destination plans.</div>
+          <div class="text-[18px] leading-[30px] md:text-[20px] md:leading-[30px]">Earn <span class="font-bold text-brand">USD</span> back from every eSIM purchase made by others worldwide.</div>
         </div>
         <button class="btn mt-7 w-full md:w-[412px] h-[64px] md:h-[76px]">
           <div class="size-full flex items-center pl-[20px] pr-[10px] bg-white/[0.08] rounded-[48px]">
@@ -397,14 +356,14 @@
             <div class="ml-auto size-[48px] md:size-[56px] rounded-full bg-brand flex-center shrink-0"><svg class="size-6 text-font-primary"><use href="#common-arrow"></use></svg></div>
           </div>
         </button>
-        <div class="flex flex-col md:flex-row items-stretch md:items-center gap-y-3 md:gap-y-0 md:gap-x-[30px] mt-8 md:mt-[60px]">
-          <button class="btn btn-white w-full md:w-[222px] h-[56px] md:h-[62px] gap-x-2 rounded-[10px] flex-center">
-            <svg class="size-[32px] md:size-[38px]"><use href="#common-apple"></use></svg>
-            <div class="flex flex-col items-start text-[14px]"><span>Download on</span><span class="font-medium">Apple Store</span></div>
+        <div class="flex flex-row items-stretch gap-x-3 md:gap-x-[30px] mt-8 md:mt-[60px]">
+          <button class="btn btn-white flex-1 md:w-[222px] h-[56px] md:h-[62px] gap-x-2 rounded-[10px] flex-center px-2">
+            <svg class="size-[26px] md:size-[38px] shrink-0"><use href="#common-apple"></use></svg>
+            <div class="flex flex-col items-start text-[12px] md:text-[14px] leading-tight"><span>Download on</span><span class="font-medium">Apple Store</span></div>
           </button>
-          <button class="btn btn-white w-full md:w-[222px] h-[56px] md:h-[62px] gap-x-2 rounded-[10px] flex-center">
-            <svg class="size-[32px] md:size-[38px]" viewBox="0 0 32 32"><use href="#google-play-badge"></use></svg>
-            <div class="flex flex-col items-start text-[14px]"><span>Download on</span><span class="font-medium">Google Play</span></div>
+          <button class="btn btn-white flex-1 md:w-[222px] h-[56px] md:h-[62px] gap-x-2 rounded-[10px] flex-center px-2">
+            <svg class="size-[26px] md:size-[38px] shrink-0" viewBox="0 0 32 32"><use href="#google-play-badge"></use></svg>
+            <div class="flex flex-col items-start text-[12px] md:text-[14px] leading-tight"><span>Download on</span><span class="font-medium">Google Play</span></div>
           </button>
         </div>
       </div>
@@ -1936,32 +1895,11 @@
       document.getElementById('modal-login').classList.remove('open');
       document.getElementById('login-btn').style.display = 'none';
       document.getElementById('user-menu-wrap').style.display = '';
-      document.getElementById('mnav-login-btn').style.display = 'none';
-      document.getElementById('mnav-user-row').style.display = '';
     }
     function logout() {
       document.getElementById('user-menu-panel').style.display = 'none';
       document.getElementById('user-menu-wrap').style.display = 'none';
       document.getElementById('login-btn').style.display = '';
-      document.getElementById('mnav-user-row').style.display = 'none';
-      document.getElementById('mnav-login-btn').style.display = '';
-    }
-
-    /* ---- mobile menu drawer ---- */
-    function openMobileMenu() {
-      document.getElementById('mobile-menu').classList.add('open');
-      document.body.classList.add('menu-open');
-    }
-    function closeMobileMenu() {
-      document.getElementById('mobile-menu').classList.remove('open');
-      document.body.classList.remove('menu-open');
-    }
-    function toggleMobileDestinations() {
-      var box = document.getElementById('mnav-destinations');
-      var chev = document.getElementById('mnav-dest-chevron');
-      var open = box.style.display !== 'none';
-      box.style.display = open ? 'none' : '';
-      chev.style.transform = open ? '' : 'rotate(180deg)';
     }
     function toggleUserMenu() {
       var panel = document.getElementById('user-menu-panel');
