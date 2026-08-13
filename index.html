@@ -273,6 +273,10 @@
           <div class="flex flex-col items-start text-[12px] leading-tight"><span>Download on</span><span class="font-medium">Google Play</span></div>
         </button>
       </div>
+
+      <div class="flex justify-center py-6">
+        <svg class="w-[104px] h-[22px] text-white"><use href="#navi-logo"></use></svg>
+      </div>
     </nav>
   </div>
 
@@ -401,7 +405,7 @@
       <div class="pt-8 pb-12 md:pt-[110px] md:pb-0 h-auto md:h-full text-white flex flex-col relative">
         <img alt="bg" class="w-[290px] h-[290px] object-contain mx-auto -mb-16 md:mb-0 md:w-[610px] md:h-[610px] md:object-fill md:absolute md:right-0 md:bottom-0" src="https://bres.talex.world/static/25d29ab1-7c02-47ac-beaf-bfdb82f50d29.png">
         <div>
-          <div class="font-medium text-[36px] leading-[42px] md:text-[60px] md:leading-none">eSIM<br>that pays you back</div>
+          <div class="font-medium text-[39px] leading-[46px] md:text-[60px] md:leading-none">eSIM<br>that pays you back</div>
           <div class="text-[18px] leading-[30px] md:text-[20px] md:leading-[30px] mt-3 md:mt-0">Stay connected in <span class="font-bold text-brand">200+</span> destinations with pay-as-you-go or destination plans.</div>
           <div class="text-[18px] leading-[30px] md:text-[20px] md:leading-[30px]">Earn <span class="font-bold text-brand">USD</span> back from every eSIM purchase made by others worldwide.</div>
         </div>
@@ -573,6 +577,10 @@
 
   <main id="page-revenue-sharing" class="page" style="background:#F7F8F9;display:none">
     <div style="max-width:900px;margin:0 auto;padding:150px 32px 120px;" class="flex flex-col gap-y-[90px]">
+
+      <button onclick="showPage(previousPage)" class="tap44 btn md:hidden" style="position:fixed;left:16px;top:calc(env(safe-area-inset-top) + 6px);z-index:39" id="rs-back-btn" aria-label="Back">
+        <svg class="size-6" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
 
       <!-- ============ PAGE HEADER ============ -->
       <div class="flex flex-col items-center gap-y-4">
@@ -848,22 +856,22 @@
         <span class="font-bold text-[22px]">Current revenue sharing pool</span>
         <div class="diagram-card flex flex-col gap-y-5 !px-4 !py-5 md:!px-10 md:!py-9">
           <div class="flex items-center gap-x-2 md:gap-x-4">
-            <span class="font-bold text-[12px] md:text-[14px] w-[62px] md:w-[110px] shrink-0">Pool A (40%)</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[46px] md:w-[110px] shrink-0">Pool A (40%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:6%"></div></div>
             <span class="font-bold text-[12px] md:text-[14px] w-[38px] md:w-[60px] shrink-0 text-right">$18</span>
           </div>
           <div class="flex items-center gap-x-2 md:gap-x-4">
-            <span class="font-bold text-[12px] md:text-[14px] w-[62px] md:w-[110px] shrink-0">Pool B (30%)</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[46px] md:w-[110px] shrink-0">Pool B (30%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:14%"></div></div>
             <span class="font-bold text-[12px] md:text-[14px] w-[38px] md:w-[60px] shrink-0 text-right">$210</span>
           </div>
           <div class="flex items-center gap-x-2 md:gap-x-4">
-            <span class="font-bold text-[12px] md:text-[14px] w-[62px] md:w-[110px] shrink-0">Pool C (20%)</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[46px] md:w-[110px] shrink-0">Pool C (20%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:48%"></div></div>
             <span class="font-bold text-[12px] md:text-[14px] w-[38px] md:w-[60px] shrink-0 text-right">$1.4K</span>
           </div>
           <div class="flex items-center gap-x-2 md:gap-x-4">
-            <span class="font-bold text-[12px] md:text-[14px] w-[62px] md:w-[110px] shrink-0">Pool D (10%)</span>
+            <span class="font-bold text-[12px] md:text-[14px] w-[46px] md:w-[110px] shrink-0">Pool D (10%)</span>
             <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
             <span class="font-bold text-[12px] md:text-[14px] w-[38px] md:w-[60px] shrink-0 text-right">$6.8K</span>
           </div>
@@ -1917,7 +1925,11 @@
   </footer>
 
 <script>
+  var previousPage = 'home';
+  var currentPage = 'home';
   function showPage(id, anchor) {
+    if (id !== currentPage) { previousPage = currentPage; }
+    currentPage = id;
     document.querySelectorAll('.page').forEach(function(p) { p.style.display = 'none'; });
     document.getElementById('page-' + id).style.display = '';
     var mh = document.getElementById('mobile-header');
