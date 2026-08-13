@@ -105,7 +105,8 @@
   #mobile-menu { position: fixed; inset:0; z-index:50; background:rgba(12,18,20,.97);
                   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
                   opacity:0; visibility:hidden; transition:opacity .2s ease;
-                  overflow-y:auto; -webkit-overflow-scrolling:touch; }
+                  overflow-y:auto; -webkit-overflow-scrolling:touch;
+                  display:flex; flex-direction:column; min-height:100dvh; }
   #mobile-menu.open { opacity:1; visibility:visible; }
   body.menu-open { overflow:hidden; }
 
@@ -241,7 +242,7 @@
     <div class="flex items-center justify-end px-4" style="height:var(--mh)">
       <button onclick="closeMobileMenu()" class="tap44 btn text-white" aria-label="Close menu"><svg class="size-6"><use href="#common-close"></use></svg></button>
     </div>
-    <nav class="flex flex-col px-6 pb-10">
+    <nav class="flex flex-col flex-1 px-6 pb-10">
       <button class="mnav-link btn" onclick="showPage('home','destinations');closeMobileMenu()">Destinations</button>
       <button class="mnav-link btn" onclick="showPage('revenue-sharing');closeMobileMenu()">Revenue Sharing</button>
       <button class="mnav-link btn" onclick="showPage('faq');closeMobileMenu()">FAQ</button>
@@ -274,7 +275,7 @@
         </button>
       </div>
 
-      <div class="flex justify-center pt-14 pb-6">
+      <div class="flex justify-center mt-auto pt-10 pb-2">
         <svg class="w-[104px] h-[22px] text-white"><use href="#navi-logo"></use></svg>
       </div>
     </nav>
